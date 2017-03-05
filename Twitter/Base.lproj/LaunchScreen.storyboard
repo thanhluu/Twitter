@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter" translatesAutoresizingMaskIntoConstraints="NO" id="ahN-dP-Q5Q">
-                                <rect key="frame" x="155.5" y="301" width="64" height="64"/>
+                                <rect key="frame" x="156" y="301" width="64" height="64"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="ONn-ya-T5f"/>
@@ -30,7 +30,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.11372549019607843" green="0.63137254901960782" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ahN-dP-Q5Q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5v3-8s-ZNP"/>
                             <constraint firstItem="ahN-dP-Q5Q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ryV-vx-VmC"/>
@@ -43,6 +43,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="twitter" width="32" height="32"/>
+        <image name="twitter" width="64" height="64"/>
     </resources>
 </document>

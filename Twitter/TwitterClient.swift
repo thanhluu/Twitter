@@ -15,8 +15,6 @@ let consumerSecret = "7bqqOfvH7IvH0TNZfSU6LFFM3Y8EaxQMrsjUAjDc6BLiad4f8x"
 
 class TwitterClient: BDBOAuth1SessionManager {
     
-    
-    
     static var sharedInstance = TwitterClient(baseURL: baseUrl, consumerKey: consumerKey, consumerSecret: consumerSecret)
     
     var loginSuccess: (() -> ())?

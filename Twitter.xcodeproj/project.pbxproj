@@ -18,6 +18,7 @@
 		B6B6ADC81E6B097D008E95AB /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B6ADC71E6B097D008E95AB /* Tweet.swift */; };
 		B6B6ADCA1E6B194A008E95AB /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B6ADC91E6B194A008E95AB /* TweetsViewController.swift */; };
 		B6B6ADCC1E6B241E008E95AB /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B6B6ADCB1E6B241E008E95AB /* README.md */; };
+		B6B6ADCF1E6B2958008E95AB /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B6ADCE1E6B2958008E95AB /* TweetCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		B6B6ADC71E6B097D008E95AB /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		B6B6ADC91E6B194A008E95AB /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		B6B6ADCB1E6B241E008E95AB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B6B6ADCE1E6B2958008E95AB /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		FD86511719824979EE9A22F0 /* Pods_Twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 				B6B6ADC31E6B0917008E95AB /* API */,
 				B6B6ADC41E6B0921008E95AB /* View Controllers */,
 				B6B6ADC21E6B090B008E95AB /* Models */,
+				B6B6ADCD1E6B292C008E95AB /* Views */,
 				B6800EA11E691905002AC9E5 /* AppDelegate.swift */,
 				B6800EA51E691905002AC9E5 /* Main.storyboard */,
 				B6800EA81E691905002AC9E5 /* Assets.xcassets */,
@@ -125,6 +128,14 @@
 				B6B6ADC91E6B194A008E95AB /* TweetsViewController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		B6B6ADCD1E6B292C008E95AB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B6B6ADCE1E6B2958008E95AB /* TweetCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +264,7 @@
 				B6B6ADC61E6B096F008E95AB /* User.swift in Sources */,
 				B6B6ADC81E6B097D008E95AB /* Tweet.swift in Sources */,
 				B6B6ADCA1E6B194A008E95AB /* TweetsViewController.swift in Sources */,
+				B6B6ADCF1E6B2958008E95AB /* TweetCell.swift in Sources */,
 				B6B6ADCC1E6B241E008E95AB /* README.md in Sources */,
 				B6800EB41E6920DA002AC9E5 /* LoginViewController.swift in Sources */,
 				B6B6ADC11E6B018C008E95AB /* TwitterClient.swift in Sources */,
