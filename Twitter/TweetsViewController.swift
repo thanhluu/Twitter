@@ -30,6 +30,10 @@ class TweetsViewController: UIViewController {
 
         loadHomeTimeline()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadHomeTimeline()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -22,6 +22,16 @@ class NewTweetViewController: UIViewController, UITextViewDelegate {
         tweetText.delegate = self
         placeholderLabel.isHidden = !tweetText.text.isEmpty
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        
+        let avatar = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        avatar.setImageWith((User.currentUser?.profileUrl)!)
+
+        let button = UIButton.init(type: .custom)
+        button.setImage(avatar.image, for: .normal)
+        button.layer.cornerRadius = 5
+        button.frame = CGRect.init(x: 0, y: 0, width: 32, height: 32)
+        let barButton = UIBarButtonItem.init(customView: button)
+        self.navigationItem.leftBarButtonItem = barButton
     }
     
     override func viewDidAppear(_ animated: Bool) {
