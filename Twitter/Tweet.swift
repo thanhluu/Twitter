@@ -9,10 +9,9 @@
 import UIKit
 
 class Tweet: NSObject {
-    var retweetedStatus: Bool = false
-    var retweetedStatusId: String?
     var user: User?
     var timestamp: Date?
+    var id: String?
     var text: String?
     var replyCount: Int = 0
     var retweetCount: Int = 0
@@ -21,10 +20,6 @@ class Tweet: NSObject {
     var isFavorited: Bool = false
     
     init(dictionary: NSDictionary) {
-        if let retweetedStatusDict = dictionary["retweeted_status"] as? NSDictionary {
-            retweetedStatus = true
-            retweetedStatusId = retweetedStatusDict["id_str"] as? String
-        }
         user = User(dictionary: dictionary["user"] as! NSDictionary)
         let timestampString = dictionary["created_at"] as? String
         if let timestampString = timestampString {
@@ -32,6 +27,7 @@ class Tweet: NSObject {
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             timestamp = formatter.date(from: timestampString)
         }
+        id = dictionary["id_str"] as? String
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         isRetweeted = (dictionary["retweeted"] as? Bool) ?? false

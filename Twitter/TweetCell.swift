@@ -10,43 +10,26 @@ import UIKit
 import DateToolsSwift
 
 class TweetCell: UITableViewCell {
-    
-    @IBOutlet weak var subHeading: UILabel!
-    
-    @IBOutlet weak var subHeadingImage: UIImageView!
-    
+
     @IBOutlet weak var avatarImage: UIImageView!
-    
     @IBOutlet weak var nameLabel: UILabel!
-    
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var timestampLabel: UILabel!
-    
     @IBOutlet weak var contentLabel: UILabel!
-    
     @IBOutlet weak var replyImage: UIImageView!
-    
     @IBOutlet weak var retweetCount: UILabel!
-    
-    @IBOutlet weak var retweetImage: UIImageView!
-    
+    @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteCount: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     
-    @IBOutlet weak var favoriteImage: UIImageView!
+    var retweetOnColor = UIColor(red: 25/255, green: 207/255, blue: 134/255, alpha: 1.0)
+    var likeOnColor = UIColor(red: 232/255, green: 28/255, blue: 79/255, alpha: 1.0)
+    var offColor = UIColor(red: 170/255, green: 184/255, blue: 194/255, alpha: 1.0)
+    
+    //let retweet = Tweet?()
     
     var tweet: Tweet! {
         didSet {
-            
-            // Display Retweet Info
-            if true == tweet.retweetedStatus {
-                subHeading.isHidden = false
-                subHeadingImage.isHidden = false
-                subHeading.text = "\((tweet.user?.name)!) Retweeted"
-            } else {
-                subHeading.isHidden = true
-                subHeadingImage.isHidden = true
-            }
             
             // Set Avatar
             avatarImage.setImageWith((tweet.user?.profileUrl)!)
@@ -67,33 +50,73 @@ class TweetCell: UITableViewCell {
             
             // Did I Retweeted?
             if tweet.isRetweeted {
-                retweetImage.image = UIImage(named: "retweet_on")
-                retweetCount.textColor = UIColor(red: 25/255, green: 207/255, blue: 134/255, alpha: 1.0)
+                retweetButton.setImage(UIImage(named: "retweet_on"), for: .normal)
+                retweetCount.textColor = retweetOnColor
             } else {
-                retweetImage.image = UIImage(named: "retweet_off")
-                retweetCount.textColor = UIColor(red: 170/255, green: 184/255, blue: 194/255, alpha: 1.0)
+                retweetButton.setImage(UIImage(named: "retweet_off"), for: .normal)
+                retweetCount.textColor = offColor
             }
             // Set Retweet Count Text
-            if ( tweet.retweetCount == 0 ) {
-                retweetCount.text = ""
-            } else {
-                retweetCount.text = String(tweet.retweetCount)
-            }
+            retweetCount.text = String(tweet.retweetCount)
             // Did I Favorited?
             if tweet.isFavorited {
-                favoriteImage.image = UIImage(named: "like_on")
-                favoriteCount.textColor = UIColor(red: 232/255, green: 28/255, blue: 79/255, alpha: 1.0)
+                favoriteButton.setImage(UIImage(named: "like_on"), for: .normal)
+                favoriteCount.textColor = likeOnColor
             } else {
-                favoriteImage.image = UIImage(named: "like_off")
-                favoriteCount.textColor = UIColor(red: 170/255, green: 184/255, blue: 194/255, alpha: 1.0)
+                favoriteButton.setImage(UIImage(named: "like_off"), for: .normal)
+                favoriteCount.textColor = offColor
             }
             // Set Favorite Count Text
-            if ( tweet.favoritesCount == 0 ) {
-                favoriteCount.text = ""
-            } else {
-                favoriteCount.text = String(tweet.favoritesCount)
-            }
+            favoriteCount.text = String(tweet.favoritesCount)
             
+        }
+    }
+    
+    @IBAction func onRetweetButton(_ sender: UIButton) {
+        if self.tweet.isRetweeted {
+            TwitterClient.sharedInstance?.retweet(tweetId: tweet.id!, action: "unretweet", success: {_ in 
+                self.retweetButton.setImage(UIImage(named: "retweet_off"), for: .normal)
+                self.tweet.retweetCount = self.tweet.retweetCount - 1
+                self.retweetCount.text = "\( self.tweet.retweetCount )"
+                self.retweetCount.textColor = self.offColor
+                self.tweet.isRetweeted = !self.tweet.isRetweeted
+            }, failure: { (error: NSError) in
+                print("Error: \(error.localizedDescription)")
+            })
+        } else {
+            TwitterClient.sharedInstance?.retweet(tweetId: tweet.id!, action: "retweet", success: {_ in 
+                self.retweetButton.setImage(UIImage(named: "retweet_on"), for: .normal)
+                self.tweet.retweetCount = self.tweet.retweetCount + 1
+                self.retweetCount.text = "\( self.tweet.retweetCount )"
+                self.retweetCount.textColor = self.retweetOnColor
+                self.tweet.isRetweeted = !self.tweet.isRetweeted
+            }, failure: { (error: NSError) in
+                print("Error: \(error.localizedDescription)")
+            })
+        }
+    }
+    
+    @IBAction func onFavoriteButton(_ sender: UIButton) {
+        if tweet.isFavorited {
+            TwitterClient.sharedInstance?.favorite(tweetId: tweet.id!, action: "destroy", success: {_ in
+                self.favoriteButton.setImage(UIImage(named: "like_off"), for: .normal)
+                self.tweet.favoritesCount = self.tweet.favoritesCount - 1
+                self.favoriteCount.text = "\( self.tweet.favoritesCount )"
+                self.favoriteCount.textColor = self.offColor
+                self.tweet.isFavorited = !self.tweet.isFavorited
+            }, failure: { (error: NSError) in
+                print("Error: \(error.localizedDescription)")
+            })
+        } else {
+            TwitterClient.sharedInstance?.favorite(tweetId: tweet.id!, action: "create", success: {_ in
+                self.favoriteButton.setImage(UIImage(named: "like_on"), for: .normal)
+                self.tweet.favoritesCount = self.tweet.favoritesCount + 1
+                self.favoriteCount.text = "\( self.tweet.favoritesCount )"
+                self.favoriteCount.textColor = self.likeOnColor
+                self.tweet.isFavorited = !self.tweet.isFavorited
+            }, failure: { (error: NSError) in
+                print("Error: \(error.localizedDescription)")
+            })
         }
     }
 

@@ -19,7 +19,7 @@ class TweetsViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 170
+        tableView.estimatedRowHeight = 160
         tableView.rowHeight = UITableViewAutomaticDimension
         
         self.navigationController?.navigationBar.barTintColor = .white
@@ -41,17 +41,6 @@ class TweetsViewController: UIViewController {
     @IBAction func onLogoutButton(_ sender: UIBarButtonItem) {
         TwitterClient.sharedInstance?.logout()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -68,5 +57,13 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.tweet = tweets[indexPath.row]
         
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        let tweetDetailViewController = segue.destination as! TweetDetailViewController
+        tweetDetailViewController.tweet = tweets[indexPath!.row]
+        tableView.deselectRow(at: indexPath!, animated: true)
     }
 }

@@ -77,7 +77,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             failure(error as NSError)
         })
     }
-    
+
     func currentAccount(success: @escaping (User) -> (), failure: @escaping (NSError) -> ()) {
         _ = get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in
             
@@ -88,6 +88,31 @@ class TwitterClient: BDBOAuth1SessionManager {
                 
                 success(user)
 
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error as NSError)
+        })
+    }
+    
+    func retweet(tweetId: String, action: String, success: @escaping (Tweet) -> (), failure: @escaping (NSError) -> ()) {
+        _ = post("1.1/statuses/\(action)/\(tweetId).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in
+            if let response = response {
+                let tweet = Tweet(dictionary: response as! NSDictionary)
+                success(tweet)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error as NSError)
+        })
+    }
+    
+    func favorite(tweetId: String, action: String, success: @escaping (Tweet) -> (), failure: @escaping (NSError) -> ()) {
+        print("1.1/favorites/\(action).json?id=\(tweetId)")
+        _ = post("1.1/favorites/\(action).json?id=\(tweetId)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in
+            if let response = response {
+                let tweet = Tweet(dictionary: response as! NSDictionary)
+                success(tweet)
             }
             
         }, failure: { (task: URLSessionDataTask?, error: Error) in
