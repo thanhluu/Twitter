@@ -13,10 +13,13 @@ class TweetsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var tweets: [Tweet]!
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl.addTarget(self, action: #selector(TweetsViewController.loadHomeTimeline), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 160
@@ -25,12 +28,7 @@ class TweetsViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .white
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "twitter-dark-blue"))
 
-        TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
-            self.tweets = tweets
-            self.tableView.reloadData()
-        }, failure: { (error: NSError) in
-            print(error.localizedDescription)
-        })
+        loadHomeTimeline()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,6 +39,9 @@ class TweetsViewController: UIViewController {
     @IBAction func onLogoutButton(_ sender: UIBarButtonItem) {
         TwitterClient.sharedInstance?.logout()
     }
+    
+    @IBAction func unwindToTweetsViewController(segue: UIStoryboardSegue) {}
+    
 }
 
 extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -59,11 +60,24 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func loadHomeTimeline() {
+        TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
+            self.tweets = tweets
+            self.tableView.reloadData()
+        }, failure: { (error: NSError) in
+            print(error.localizedDescription)
+        })
+        self.refreshControl.endRefreshing()
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPath(for: cell)
-        let tweetDetailViewController = segue.destination as! TweetDetailViewController
-        tweetDetailViewController.tweet = tweets[indexPath!.row]
-        tableView.deselectRow(at: indexPath!, animated: true)
+        if (sender is UITableViewCell) {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)
+            let tweetDetailViewController = segue.destination as! TweetDetailViewController
+            tweetDetailViewController.tweet = tweets[indexPath!.row]
+            tableView.deselectRow(at: indexPath!, animated: true)
+        }
     }
 }

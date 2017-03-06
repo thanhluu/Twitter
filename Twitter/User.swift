@@ -8,6 +8,9 @@
 
 import UIKit
 
+let currentUserKey = "currentUser"
+let currentUserDataKey = "currentUserData"
+
 class User: NSObject {
     var name: String?
     var screenname: String?
@@ -38,15 +41,13 @@ class User: NSObject {
         get {
             if _currentUser == nil {
                 let defaults = UserDefaults.standard
-            
-                let userData = defaults.object(forKey: "currentUser") as? NSData
-            
+                let userData = defaults.data(forKey: currentUserKey)
+                
                 if let userData = userData {
-                    let dictionary = try! JSONSerialization.jsonObject(with: userData as Data, options: []) as! NSDictionary
+                    let dictionary = try! JSONSerialization.jsonObject(with: userData, options: []) as! NSDictionary
                     _currentUser = User(dictionary: dictionary)
                 }
             }
-            
             return _currentUser
         }
         set(user) {
@@ -55,14 +56,14 @@ class User: NSObject {
             let defaults = UserDefaults.standard
             
             if let user = user {
-                let data =  try! JSONSerialization.data(withJSONObject: user.dictionary!, options: [])
-                defaults.set(data, forKey: "currentUser")
+                let data = try! JSONSerialization.data(withJSONObject: user.dictionary!, options: [])
+                
+                defaults.set(data, forKey: currentUserKey)
+                
             } else {
-                defaults.set(nil, forKey: "currentUser")
+                defaults.set(nil, forKey: currentUserKey)
             }
-            
             defaults.synchronize()
-            
         }
     }
 }

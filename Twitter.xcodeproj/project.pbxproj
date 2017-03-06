@@ -19,7 +19,6 @@
 		B6B6ADC61E6B096F008E95AB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B6ADC51E6B096F008E95AB /* User.swift */; };
 		B6B6ADC81E6B097D008E95AB /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B6ADC71E6B097D008E95AB /* Tweet.swift */; };
 		B6B6ADCA1E6B194A008E95AB /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B6ADC91E6B194A008E95AB /* TweetsViewController.swift */; };
-		B6B6ADCC1E6B241E008E95AB /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B6B6ADCB1E6B241E008E95AB /* README.md */; };
 		B6B6ADCF1E6B2958008E95AB /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B6ADCE1E6B2958008E95AB /* TweetCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +38,6 @@
 		B6B6ADC51E6B096F008E95AB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6B6ADC71E6B097D008E95AB /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		B6B6ADC91E6B194A008E95AB /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
-		B6B6ADCB1E6B241E008E95AB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B6B6ADCE1E6B2958008E95AB /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		FD86511719824979EE9A22F0 /* Pods_Twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -76,7 +74,6 @@
 		B6800E951E691905002AC9E5 = {
 			isa = PBXGroup;
 			children = (
-				B6B6ADCB1E6B241E008E95AB /* README.md */,
 				B6800EA01E691905002AC9E5 /* Twitter */,
 				B6800E9F1E691905002AC9E5 /* Products */,
 				0C2B3E1E22A9425A2F33B89F /* Pods */,
@@ -272,7 +269,6 @@
 				B62586BA1E6C7CAD005B2A3B /* TweetDetailViewController.swift in Sources */,
 				B6B6ADCA1E6B194A008E95AB /* TweetsViewController.swift in Sources */,
 				B6B6ADCF1E6B2958008E95AB /* TweetCell.swift in Sources */,
-				B6B6ADCC1E6B241E008E95AB /* README.md in Sources */,
 				B6800EB41E6920DA002AC9E5 /* LoginViewController.swift in Sources */,
 				B6B6ADC11E6B018C008E95AB /* TwitterClient.swift in Sources */,
 				B6800EA21E691905002AC9E5 /* AppDelegate.swift in Sources */,
@@ -402,7 +398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 566T8PK976;
 				INFOPLIST_FILE = Twitter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thanhlt.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -417,7 +413,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 566T8PK976;
 				INFOPLIST_FILE = Twitter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thanhlt.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";

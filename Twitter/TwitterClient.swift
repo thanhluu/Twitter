@@ -28,7 +28,11 @@ class TwitterClient: BDBOAuth1SessionManager {
         TwitterClient.sharedInstance?.fetchRequestToken(withPath: "oauth/request_token", method: "POST", callbackURL: URL(string: "mytwitterlite://"), scope: nil, success: { (response: BDBOAuth1Credential?) in
             if let response = response {
                 let authURL = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(response.token!)")
-                UIApplication.shared.open(authURL!, options: [:], completionHandler: nil)
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(authURL!, options: [:], completionHandler: nil)
+                } else {
+                    // Fallback on earlier versions
+                }
             }
             
         }, failure: { (error: Error?) in
@@ -108,8 +112,19 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func favorite(tweetId: String, action: String, success: @escaping (Tweet) -> (), failure: @escaping (NSError) -> ()) {
-        print("1.1/favorites/\(action).json?id=\(tweetId)")
         _ = post("1.1/favorites/\(action).json?id=\(tweetId)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in
+            if let response = response {
+                let tweet = Tweet(dictionary: response as! NSDictionary)
+                success(tweet)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error as NSError)
+        })
+    }
+    
+    func tweet(status: String, success: @escaping (Tweet) -> (), failure: @escaping (NSError) -> ()) {
+        _ = post("1.1/statuses/update.json", parameters: ["status": status], progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in
             if let response = response {
                 let tweet = Tweet(dictionary: response as! NSDictionary)
                 success(tweet)
