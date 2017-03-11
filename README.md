@@ -4,7 +4,7 @@
 
 Time spent: **19** hours spent in total
 
-## User Stories
+## User Stories Week 3
 
 The following **required** functionality is completed:
 
@@ -24,6 +24,32 @@ The following **optional** features are implemented:
 - [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
 - [ ] Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
 - [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
+
+## User Stories Week 4
+
+The following **required** functionality is completed:
+
+- [x] Hamburger menu
+    - [x] Dragging anywhere in the view should reveal the menu.
+    - [x] The menu should include links to your profile, the home timeline, and the mentions view.
+    - [ ] The menu can look similar to the example or feel free to take liberty with the UI.
+- [ ] Profile page
+    - [ ] Contains the user header view
+    - [ ] Contains a section with the users basic stats: # tweets, # following, # followers
+- [ ] Home Timeline
+    - [ ] Tapping on a user image should bring up that user's profile page
+
+The following **optional** features are implemented:
+
+- [ ] Profile Page
+    - [ ] Implement the paging view for the user description.
+    - [ ] As the paging view moves, increase the opacity of the background screen. See the actual Twitter app for this effect
+    - [ ] Pulling down the profile page should blur and resize the header image.
+- [ ] Account switching
+    - [ ] Long press on tab bar to bring up Account view with animation
+    - [ ] Tap account to switch to
+    - [ ] Include a plus button to Add an Account
+    - [ ] Swipe to delete an account
 
 ## Video Walkthrough
 
