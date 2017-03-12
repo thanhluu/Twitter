@@ -50,7 +50,7 @@ class ProfileViewController: UIViewController {
                 
                 self.navigationItem.rightBarButtonItems = [close]
                 
-                self.navigationItem.leftBarButtonItem = nil
+                //self.navigationItem.leftBarButtonItem = nil
                 
                 self.user = user
                 

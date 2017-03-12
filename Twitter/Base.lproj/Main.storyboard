@@ -245,11 +245,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="JAu-M5-AnY">
-                        <barButtonItem key="leftBarButtonItem" image="hamburger" id="Xnk-90-9vv">
-                            <connections>
-                                <action selector="onHamburgerButton:" destination="FEe-wx-Akg" id="VSK-xy-kgF"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="quill" id="DEN-gt-zrs">
                             <connections>
                                 <segue destination="mAB-eS-HXy" kind="presentation" id="FgC-Db-0BH"/>
@@ -550,9 +545,7 @@
                             <constraint firstItem="gGW-Bn-leO" firstAttribute="leading" secondItem="Ov8-H7-bzQ" secondAttribute="leading" id="uTn-Nj-m5G"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="ZK6-8n-dcJ">
-                        <barButtonItem key="leftBarButtonItem" image="hamburger" id="pub-R4-zro"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Profile" id="ZK6-8n-dcJ"/>
                     <connections>
                         <outlet property="avatarImageView" destination="jmb-mQ-obn" id="N1Q-Nh-uxH"/>
                         <outlet property="bannerView" destination="hJd-kV-ZAB" id="7vY-zn-ETE"/>
@@ -1265,9 +1258,7 @@
                             <constraint firstAttribute="trailing" secondItem="0Rk-EM-zxx" secondAttribute="trailing" id="WmO-hI-0bA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Mentions" id="iIo-mV-1Wy">
-                        <barButtonItem key="leftBarButtonItem" image="hamburger" id="SnM-pI-zaN"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Mentions" id="iIo-mV-1Wy"/>
                     <connections>
                         <outlet property="tableView" destination="0Rk-EM-zxx" id="EkF-hd-6NB"/>
                     </connections>
@@ -1296,7 +1287,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="hamburger" width="24" height="24"/>
         <image name="like_off" width="40" height="40"/>
         <image name="logout" width="16" height="16"/>
         <image name="quill" width="24" height="24"/>
