@@ -81,6 +81,38 @@ class TwitterClient: BDBOAuth1SessionManager {
             failure(error as NSError)
         })
     }
+    
+    func mentionsTimeline(success: @escaping ([Tweet]) -> (), failure: @escaping (NSError) -> ()) {
+        _ = get("1.1/statuses/mentions_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in
+            
+            if let response = response {
+                let dictionaries = response as! [NSDictionary]
+                
+                let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+                
+                success(tweets)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error as NSError)
+        })
+    }
+    
+    func userTimeline(userId: Int64, success: @escaping ([Tweet]) -> (), failure: @escaping (NSError) -> ()) {
+        _ = get("/1.1/statuses/user_timeline.json", parameters: ["user_id": userId], progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in
+            
+            if let response = response {
+                let dictionaries = response as! [NSDictionary]
+                
+                let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+                
+                success(tweets)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error as NSError)
+        })
+    }
 
     func currentAccount(success: @escaping (User) -> (), failure: @escaping (NSError) -> ()) {
         _ = get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in

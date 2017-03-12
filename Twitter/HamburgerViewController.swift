@@ -18,7 +18,6 @@ class HamburgerViewController: UIViewController {
     var menuViewController: UIViewController! {
         didSet {
             view.layoutIfNeeded()
-            
             menuView.addSubview(menuViewController.view)
         }
     }
@@ -65,7 +64,7 @@ class HamburgerViewController: UIViewController {
             leftMarginConstraint.constant = originalLeftMargin + translation.x
         } else if sender.state == .ended {
             
-            UIView.animate(withDuration: 0.3, animations: { 
+            UIView.animate(withDuration: 0.3, animations: {
                 if velocity.x > 0 {
                     // Opening
                     self.leftMarginConstraint.constant = self.view.frame.size.width - 50

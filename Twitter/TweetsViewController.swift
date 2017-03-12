@@ -18,6 +18,9 @@ class TweetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Style for Navigation Bar
+        navigationController?.navigationBar.barTintColor = .white
+        
         refreshControl.addTarget(self, action: #selector(TweetsViewController.loadHomeTimeline), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
         tableView.delegate = self
@@ -25,9 +28,6 @@ class TweetsViewController: UIViewController {
         tableView.estimatedRowHeight = 160
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        self.navigationController?.navigationBar.barTintColor = .white
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "twitter-dark-blue"))
-
         loadHomeTimeline()
     }
     
@@ -39,11 +39,7 @@ class TweetsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func onLogoutButton(_ sender: UIBarButtonItem) {
-        TwitterClient.sharedInstance?.logout()
-    }
-    
+
     @IBAction func unwindToTweetsViewController(segue: UIStoryboardSegue) {}
     
 }

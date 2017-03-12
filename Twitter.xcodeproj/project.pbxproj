@@ -136,11 +136,11 @@
 			isa = PBXGroup;
 			children = (
 				B6800EB31E6920DA002AC9E5 /* LoginViewController.swift */,
+				B6D680B51E73A404004AFD7C /* HamburgerViewController.swift */,
+				B6D680B71E73A53A004AFD7C /* MenuViewController.swift */,
 				B6B6ADC91E6B194A008E95AB /* TweetsViewController.swift */,
 				B62586B91E6C7CAD005B2A3B /* TweetDetailViewController.swift */,
 				B62586BB1E6C7CC3005B2A3B /* NewTweetViewController.swift */,
-				B6D680B51E73A404004AFD7C /* HamburgerViewController.swift */,
-				B6D680B71E73A53A004AFD7C /* MenuViewController.swift */,
 				B6D680B91E73A61F004AFD7C /* ProfileViewController.swift */,
 				B6D680BD1E73BF08004AFD7C /* MentionsViewController.swift */,
 			);
@@ -418,7 +418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 566T8PK976;
 				INFOPLIST_FILE = Twitter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thanhlt.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -433,7 +433,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 566T8PK976;
 				INFOPLIST_FILE = Twitter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thanhlt.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
