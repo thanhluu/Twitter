@@ -21,38 +21,20 @@ class ProfileViewController: UIViewController {
     
     var tweets: [Tweet]!
     let refreshControl = UIRefreshControl()
-    let user = User.currentUser!
-
+    var user_id: Int64?
+    var user = User.currentUser!
+    
+    //var user: User!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let user = User.currentUser!
-        // Set Avatar
-        avatarImageView.setImageWith(user.profileUrl!)
-        avatarImageView.layer.cornerRadius = 5
-        avatarImageView.clipsToBounds = true
-        
-        // Set Name
-        displayNameLabel.text = user.name
-        
-        // Set Screen Name
-        usernameLabel.text = "@\((user.screenname)!)"
-        
-        // Set Tweets Count
-        tweetsCount.text = "\((user.tweetsCount)!)"
-        
-        // Set Following Count
-        followingCount.text = "\((user.followingCount)!)"
-        
-        // Set Followers Count
-        followersCount.text = "\((user.followersCount)!)"
-        
-        // Set Avatar
-        let bannerImage = UIImageView(frame: bannerView.bounds)
-        bannerImage.setImageWith(user.profileBannerUrl!)
-        bannerView.insertSubview(bannerImage, at: 0)
         
         // Style for Navigation Bar
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.barTintColor = UIColor(red: 29/255, green: 161/255, blue: 243/255, alpha: 1.0)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationController?.navigationBar.barStyle = UIBarStyle.black
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.shadowImage = nil
         
         refreshControl.addTarget(self, action: #selector(ProfileViewController.loadUserTimeline), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
@@ -61,11 +43,82 @@ class ProfileViewController: UIViewController {
         tableView.estimatedRowHeight = 160
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        loadUserTimeline()
+        if let user_id = user_id {
+            TwitterClient.sharedInstance?.userShow(userId: user_id, success: { (user: User) in
+                
+                let close = UIBarButtonItem(barButtonSystemItem: .stop , target: self, action: #selector(ProfileViewController.dismissThisView))
+                
+                self.navigationItem.rightBarButtonItems = [close]
+                
+                self.navigationItem.leftBarButtonItem = nil
+                
+                self.user = user
+                
+                // Set Avatar
+                self.avatarImageView.setImageWith(user.profileUrl!)
+                self.avatarImageView.layer.cornerRadius = 5
+                self.avatarImageView.clipsToBounds = true
+                
+                // Set Name
+                self.displayNameLabel.text = user.name
+                
+                // Set Screen Name
+                self.usernameLabel.text = "@\((user.screenname)!)"
+                
+                // Set Tweets Count
+                self.tweetsCount.text = "\((user.tweetsCount)!)"
+                
+                // Set Following Count
+                self.followingCount.text = "\((user.followingCount)!)"
+                
+                // Set Followers Count
+                self.followersCount.text = "\((user.followersCount)!)"
+                
+                // Set Avatar
+                if let userProfileBannerUrl = user.profileBannerUrl {
+                    let bannerImage = UIImageView(frame: self.bannerView.bounds)
+                    bannerImage.setImageWith(userProfileBannerUrl)
+                    self.bannerView.insertSubview(bannerImage, at: 0)
+                }
+                
+                self.loadUserTimeline( user_id: user.id! )
+            }, failure: { (error: NSError) in
+                print(error.localizedDescription)
+            })
+        } else {
+            // Set Avatar
+            avatarImageView.setImageWith(user.profileUrl!)
+            avatarImageView.layer.cornerRadius = 5
+            avatarImageView.clipsToBounds = true
+            
+            // Set Name
+            displayNameLabel.text = user.name
+            
+            // Set Screen Name
+            usernameLabel.text = "@\((user.screenname)!)"
+            
+            // Set Tweets Count
+            tweetsCount.text = "\((user.tweetsCount)!)"
+            
+            // Set Following Count
+            followingCount.text = "\((user.followingCount)!)"
+            
+            // Set Followers Count
+            followersCount.text = "\((user.followersCount)!)"
+            
+            // Set Avatar
+            if let userProfileBannerUrl = user.profileBannerUrl {
+                let bannerImage = UIImageView(frame: bannerView.bounds)
+                bannerImage.setImageWith(userProfileBannerUrl)
+                bannerView.insertSubview(bannerImage, at: 0)
+            }
+            
+            loadUserTimeline( user_id: user.id! )
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadUserTimeline()
+        loadUserTimeline( user_id: user.id! )
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,15 +143,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func loadUserTimeline() {
-        TwitterClient.sharedInstance?.userTimeline(userId: user.id!,success: { (tweets: [Tweet]) in
+    func loadUserTimeline( user_id: Int64 ) {
+        TwitterClient.sharedInstance?.userTimeline(userId: user_id, success: { (tweets: [Tweet]) in
             self.tweets = tweets
             self.tableView.reloadData()
         }, failure: { (error: NSError) in
             print(error.localizedDescription)
         })
         self.refreshControl.endRefreshing()
-        
+    }
+    
+    func dismissThisView() {
+        dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

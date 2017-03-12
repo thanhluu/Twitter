@@ -19,7 +19,11 @@ class TweetsViewController: UIViewController {
         super.viewDidLoad()
         
         // Style for Navigation Bar
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.barTintColor = UIColor(red: 29/255, green: 161/255, blue: 243/255, alpha: 1.0)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationController?.navigationBar.barStyle = UIBarStyle.black
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.shadowImage = nil
         
         refreshControl.addTarget(self, action: #selector(TweetsViewController.loadHomeTimeline), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
@@ -39,6 +43,10 @@ class TweetsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func onHamburgerButton(_ sender: UIBarButtonItem) {
+    }
+    
 
     @IBAction func unwindToTweetsViewController(segue: UIStoryboardSegue) {}
     
@@ -78,6 +86,19 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
             let tweetDetailViewController = segue.destination as! TweetDetailViewController
             tweetDetailViewController.tweet = tweets[indexPath!.row]
             tableView.deselectRow(at: indexPath!, animated: true)
+        } else if (sender is UIButton) {
+            let navVC = segue.destination as! UINavigationController
+            let profileViewController = navVC.viewControllers.first as! ProfileViewController
+            let button = sender as! UIButton
+            if let superview = button.superview {
+                if let cell = superview.superview as? UITableViewCell {
+                    let indexPath = tableView.indexPath(for: cell)
+                    if let user = tweets[indexPath!.row].user {
+                        profileViewController.user_id = user.id
+                    }
+                    
+                }
+            }
         }
     }
 }

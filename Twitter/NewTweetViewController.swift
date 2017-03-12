@@ -18,6 +18,13 @@ class NewTweetViewController: UIViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Style for Navigation Bar
+        navigationController?.navigationBar.barTintColor = UIColor(red: 29/255, green: 161/255, blue: 243/255, alpha: 1.0)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationController?.navigationBar.barStyle = UIBarStyle.black
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.shadowImage = nil
+        
         tweetButton.layer.cornerRadius = 5
         tweetText.delegate = self
         placeholderLabel.isHidden = !tweetText.text.isEmpty

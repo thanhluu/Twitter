@@ -66,6 +66,22 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func userShow(userId: Int64, success: @escaping (User) -> (), failure: @escaping (NSError) -> ()) {
+        _ = get("1.1/users/show.json", parameters: ["user_id": userId], progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in
+            
+            if let response = response {
+                let dictionary = response as! NSDictionary
+                
+                let user = User(dictionary: dictionary)
+                
+                success(user)
+            }
+            
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error as NSError)
+        })
+    }
+    
     func homeTimeline(success: @escaping ([Tweet]) -> (), failure: @escaping (NSError) -> ()) {
         _ = get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response:  Any?) in
             
