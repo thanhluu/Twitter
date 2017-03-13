@@ -25,6 +25,7 @@ class LoginViewController: UIViewController {
     @IBAction func onLogin(_ sender: UIButton) {
         TwitterClient.sharedInstance?.login(success: {
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            
         }, failure: { (error: NSError) in
             print("Error: \(error.localizedDescription)")
         })
@@ -32,12 +33,17 @@ class LoginViewController: UIViewController {
 
     /*
     // MARK: - Navigation
-
+    */
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+//        let des = segue.destination as! HamburgerViewController
+//        let menuViewController = storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+//        menuViewController.hamburgerViewController = des
+//        des.menuViewController = menuViewController
     }
-    */
+ 
 
 }
