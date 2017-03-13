@@ -39,10 +39,10 @@ class LoginViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-//        let des = segue.destination as! HamburgerViewController
-//        let menuViewController = storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
-//        menuViewController.hamburgerViewController = des
-//        des.menuViewController = menuViewController
+        let des = segue.destination as! HamburgerViewController
+        let menuViewController = storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+        menuViewController.hamburgerViewController = des
+        des.menuViewController = menuViewController
     }
  
 
